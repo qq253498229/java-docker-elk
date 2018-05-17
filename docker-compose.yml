@@ -1,0 +1,28 @@
+version: "3"
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - esnet
+    volumes:
+      - ${PWD}/docker/data/elasticsearch/data:/usr/share/elasticsearch/data
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.2.4
+    ports:
+      - "5601:5601"
+    networks:
+      - esnet
+  logstash:
+    image: docker.elastic.co/logstash/logstash:6.2.4
+    ports:
+      - "5000:5000"
+    command: logstash -f /etc/logstash/conf.d/logstash.conf
+    volumes:
+     - ${PWD}/docker/conf/logstash:/etc/logstash/conf.d
+    networks:
+      - esnet
+networks:
+  esnet:
