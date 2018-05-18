@@ -1,0 +1,1 @@
+NGINX_ACCESS ^%{IPORHOST:remote_addr} (?:-|%{USERNAME:user}) (?:-|%{USER:auth}) \[%{HTTPDATE:timestamp}\] \"(?:%{WORD:request_method} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|-)\" %{NUMBER:response} (?:-|%{NUMBER:bytes}) \"(?:-|%{URIPROTO:http_referrer}|-)\" \"%{GREEDYDATA:user_agent}\" \"%{IPORHOST:x_forword_for}\"
